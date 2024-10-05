@@ -1,0 +1,28 @@
+.file-uploader {
+  margin-bottom: 20px;
+}
+
+.drop-zone {
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.drop-zone:hover {
+  background-color: #f0f0f0;
+}
+
+.uploaded-files {
+  margin-top: 20px;
+}
+
+.uploaded-files ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.uploaded-files li {
+  margin-bottom: 5px;
+}

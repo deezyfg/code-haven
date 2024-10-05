@@ -1,0 +1,61 @@
+.theme-dropdown-container {
+  position: relative;
+  width: 180px; /* Adjusted width */
+}
+
+.theme-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #b3b3b3;
+  z-index: 1;
+}
+
+.theme-dropdown {
+  width: 100%;
+}
+
+.theme-dropdown .react-select__control {
+  padding-left: 30px;
+}
+
+.theme-dropdown .react-select__single-value {
+  color: #ffffff;
+}
+
+.theme-dropdown .react-select__menu {
+  background-color: #2d2d2d;
+  border: 1px solid #3e3e3e;
+  border-radius: 4px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.theme-dropdown .react-select__option {
+  background-color: #2d2d2d;
+  color: #ffffff;
+}
+
+.theme-dropdown .react-select__option--is-focused {
+  background-color: #3e3e3e;
+}
+
+.theme-dropdown .react-select__option--is-selected {
+  background-color: #4a4a4a;
+}
+
+.theme-dropdown .react-select__indicator-separator {
+  background-color: #3e3e3e;
+}
+
+.theme-dropdown .react-select__dropdown-indicator {
+  color: #ffffff;
+}
+
+.theme-dropdown .react-select__placeholder {
+  color: #a0a0a0;
+}
+
+.theme-dropdown .react-select__menu-list {
+  max-height: 300px;
+}

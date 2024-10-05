@@ -1,0 +1,240 @@
+.navbar {
+  background-color: #2c3e50;
+  padding: 0.5rem 1rem;
+  color: #ecf0f1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-brand .navbar-item {
+  color: #ecf0f1;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand .navbar-item:hover {
+  color: #3498db;
+}
+
+.navbar-menu {
+  display: flex;
+}
+
+.navbar-start, .navbar-end {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-item {
+  color: #ecf0f1;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin: 0 0.5rem;
+}
+
+.navbar-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: all 0.5s;
+}
+
+.navbar-item:hover::before {
+  left: 100%;
+}
+
+.navbar-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #3498db;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.navbar-item:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.navbar-item:hover {
+  color: #3498db;
+  transform: translateY(-2px);
+}
+
+.navbar-item .icon {
+  margin-right: 0.5rem;
+}
+
+/* Specific styles for Home and About buttons */
+.navbar-item.home-btn,
+.navbar-item.about-btn {
+  background-color: rgba(52, 152, 219, 0.1);
+  border-radius: 20px;
+  padding: 0.5rem 1.2rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.navbar-item.home-btn:hover,
+.navbar-item.about-btn:hover {
+  background-color: rgba(52, 152, 219, 0.2);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transform: translateY(-3px) scale(1.05);
+}
+
+.navbar-item.home-btn:active,
+.navbar-item.about-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+  }
+}
+
+.navbar-item.home-btn:focus,
+.navbar-item.about-btn:focus {
+  outline: none;
+  animation: pulse 1.5s infinite;
+}
+
+.button {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.button:first-of-type {
+  margin-left: 0;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: all 0.5s;
+}
+
+.button:hover::before {
+  left: 100%;
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+.button svg {
+  margin-right: 0.5rem;
+}
+
+/* Specific button styles */
+.button.collaborate {
+  background-color: #3498db;
+  color: white;
+}
+
+.button.collaborate:hover {
+  background-color: #2980b9;
+}
+
+.button.share {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.button.share:hover {
+  background-color: #27ae60;
+}
+
+.button.leave {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.button.leave:hover {
+  background-color: #c0392b;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: .5rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .navbar-menu {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: .5rem;
+  }
+
+  .navbar-item {
+    width: 100%;
+    padding: .5rem;
+  }
+
+  .button {
+    width: 100%;
+    margin-left: 0;
+    margin-top: .5rem;
+    justify-content: center;
+  }
+
+  .navbar-item.home-btn,
+  .navbar-item.about-btn {
+    margin-bottom: 0.5rem;
+  }
+}
