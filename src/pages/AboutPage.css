@@ -1,0 +1,221 @@
+.aboutPageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+  color: #ffffff;
+}
+
+.aboutPageContent {
+  flex: 1;
+  padding: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 1s ease-out;
+}
+
+.title {
+  font-size: 3.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+  font-size: 2.5rem;
+  color: #fdbb2d;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  animation: fadeIn 1.5s ease-out;
+}
+
+/* Code Haven Title */
+.animated-text {
+  display: inline-block;
+  color: #fdbb2d; /* Golden yellow */
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.feature-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.feature-item svg {
+  color: #fdbb2d;
+  margin-bottom: 1rem;
+}
+
+.feature-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.tech-stack {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.tech-stack p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Technology Stack Items */
+.tech-item {
+  display: inline-block;
+  color: #4de6ff; /* Bright cyan */
+  font-weight: bold;
+  margin: 0 5px;
+  animation: slideIn 0.5s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: color 0.3s ease;
+}
+
+.tech-item:nth-child(1) { animation-delay: 0.1s; }
+.tech-item:nth-child(2) { animation-delay: 0.2s; }
+.tech-item:nth-child(3) { animation-delay: 0.3s; }
+.tech-item:nth-child(4) { animation-delay: 0.4s; }
+.tech-item:nth-child(5) { animation-delay: 0.5s; }
+
+.tech-item:hover {
+  color: #FF6F61;
+  animation: wiggle 0.5s ease-in-out;
+}
+
+.cta-section {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background-color: #fdbb2d;
+  color: #1a2a6c;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #ffa500;
+  transform: translateY(-5px);
+}
+
+.cta-button svg {
+  margin-right: 0.5rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  75% { transform: rotate(-5deg); }
+}
+
+@media (max-width: 768px) {
+  .aboutPageContent {
+    padding: 2rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-item {
+    padding: 1.5rem;
+  }
+
+  .cta-button {
+    padding: 0.8rem 1.6rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutPageContent {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+
+  .feature-item h3 {
+    font-size: 1.2rem;
+  }
+
+  .tech-stack p {
+    font-size: 0.9rem;
+  }
+}

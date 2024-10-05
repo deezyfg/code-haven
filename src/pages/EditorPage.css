@@ -1,0 +1,103 @@
+.editorPageWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2c3e50, #4ca1af);
+}
+
+.editorPageContent {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.clientsList {
+  width: 400px;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  border-radius: 0 15px 15px 0;
+}
+
+.clientsList:hover {
+  transform: translateX(5px);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.clientsList h3 {
+  margin: 0;
+  padding-bottom: 15px;
+  font-size: 16px;
+  color: #e0e0e0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.clientsList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.clientsList::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.clientsList::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.clientsList::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.editorContainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 12px;
+  margin: 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-out;
+  overflow: hidden;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.connecting, .connection-failed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 24px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2c3e50, #4ca1af);
+}
+
+@media (max-width: 768px) {
+  .editorPageContent {
+    flex-direction: column;
+  }
+
+  .clientsList {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-radius: 0 0 15px 15px;
+  }
+
+  .editorContainer {
+    margin: 10px;
+  }
+}
