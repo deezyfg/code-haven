@@ -177,7 +177,7 @@ This web app is deployed at:
 - **Backend:** [Heroku](https://your-heroku-url.com)
 
 ##Demo
-[![Watch the video](https://raw.githubusercontent.com/blindlit0/code-haven/main/demo/thumbnail.jpg)](https://raw.githubusercontent.com/blindlit0/code-haven/main/demo/code-havenDemoVid.mp4)
+[![Code Haven's Demo Video](https://img.youtube.com/vi/4yZkWM32Ubc/hqdefault.jpg)](https://www.youtube.com/watch?v=4yZkWM32Ubc)
 
 ## 🤝 Contributing
 
