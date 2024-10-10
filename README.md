@@ -176,6 +176,9 @@ This web app is deployed at:
 - **Frontend:** [Netlify](https://your-netlify-url.com)
 - **Backend:** [Heroku](https://your-heroku-url.com)
 
+##Demo
+[![Watch the video](https://raw.githubusercontent.com/blindlit0/code-haven/main/demo/thumbnail.jpg)](https://raw.githubusercontent.com/blindlit0/code-haven/main/demo/code-havenDemoVid.mp4)
+
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for how to get started.
