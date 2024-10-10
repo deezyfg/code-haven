@@ -176,7 +176,7 @@ This web app is deployed at:
 - **Frontend:** [Netlify](https://your-netlify-url.com)
 - **Backend:** [Heroku](https://your-heroku-url.com)
 
-## Demo
+## Demo Video
 
 [![Code Haven's Demo Video](https://img.youtube.com/vi/4yZkWM32Ubc/hqdefault.jpg)](https://www.youtube.com/watch?v=4yZkWM32Ubc)
 
