@@ -1,26 +1,13 @@
 import React, { useState, useRef } from 'react';
 import './FileUploader.css';
 
-const FileUploader = ({ socket, roomId }) => {
+const FileUploader = ({ socket, roomId, onFileUpload }) => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const fileInputRef = useRef(null);
 
   const handleFileUpload = (event) => {
     const files = Array.from(event.target.files);
     setUploadedFiles((prevFiles) => [...prevFiles, ...files]);
-
-    // Emit file upload event to server
-    files.forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        socket.emit('file_upload', {
-          roomId,
-          fileName: file.name,
-          fileData: e.target.result,
-        });
-      };
-      reader.readAsDataURL(file);
-    });
   };
 
   const handleDragOver = (event) => {
@@ -31,19 +18,15 @@ const FileUploader = ({ socket, roomId }) => {
     event.preventDefault();
     const files = Array.from(event.dataTransfer.files);
     setUploadedFiles((prevFiles) => [...prevFiles, ...files]);
+  };
 
-    // Emit file upload event to server
-    files.forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        socket.emit('file_upload', {
-          roomId,
-          fileName: file.name,
-          fileData: e.target.result,
-        });
-      };
-      reader.readAsDataURL(file);
-    });
+  const handleLoadToEditor = (file) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const fileContent = e.target.result;
+      onFileUpload(file.name, fileContent);
+    };
+    reader.readAsText(file);
   };
 
   return (
@@ -67,7 +50,10 @@ const FileUploader = ({ socket, roomId }) => {
         <h4>Uploaded Files:</h4>
         <ul>
           {uploadedFiles.map((file, index) => (
-            <li key={index}>{file.name}</li>
+            <li key={index}>
+              {file.name}
+              <button onClick={() => handleLoadToEditor(file)}>Load to Editor</button>
+            </li>
           ))}
         </ul>
       </div>
