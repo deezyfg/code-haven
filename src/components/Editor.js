@@ -9,7 +9,6 @@ import ThemeDropdown from './ThemeDropdown';
 import Executor from './Executor';
 import { languageOptions } from '../helpers/languages';
 import { defineTheme } from '../helpers/defineTheme';
-import { utf8_to_b64_safe, b64_to_utf8_safe } from '../helpers/utils';
 import './Editor.css';
 
 const DEFAULT_LANGUAGE = '63'; // JavaScript
@@ -25,8 +24,8 @@ function greet(name) {
 const userName = "World";
 console.log(greet(userName));`;
 
-const Editor = ({ roomId, socket }) => {
-  const [code, setCode] = useState(DEFAULT_CODE);
+const Editor = ({ roomId, socket, code: initialCode, onChange, onLanguageChange }) => {
+  const [code, setCode] = useState(initialCode || DEFAULT_CODE);
   const [language, setLanguage] = useState(DEFAULT_LANGUAGE);
   const [theme, setTheme] = useState(DEFAULT_THEME);
   const [isRunning, setIsRunning] = useState(false);
@@ -35,6 +34,15 @@ const Editor = ({ roomId, socket }) => {
   const editorRef = useRef(null);
   const monacoRef = useRef(null);
   const executorRef = useRef(null);
+  const [isDefaultCode, setIsDefaultCode] = useState(true);
+  const [isCodeModified, setIsCodeModified] = useState(false);
+
+  useEffect(() => {
+    if (!isCodeModified) {
+      setCode(initialCode || DEFAULT_CODE);
+      setIsDefaultCode(initialCode === DEFAULT_CODE || !initialCode);
+    }
+  }, [initialCode, isCodeModified]);
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('selectedLanguage');
@@ -58,15 +66,10 @@ const Editor = ({ roomId, socket }) => {
   useEffect(() => {
     if (!socket) return;
 
-    const handleCodeChange = (newCode) => {
-      setCode(b64_to_utf8_safe(newCode.code));
-    };
-
     const handleLanguageChange = (newLang) => {
       setLanguage(newLang.language);
     };
 
-    socket.on('code-change', handleCodeChange);
     socket.on('language-change', handleLanguageChange);
     socket.on('error', (error) => {
       console.error('Socket error:', error);
@@ -74,7 +77,6 @@ const Editor = ({ roomId, socket }) => {
     });
 
     return () => {
-      socket.off('code-change', handleCodeChange);
       socket.off('language-change', handleLanguageChange);
       socket.off('error');
     };
@@ -89,7 +91,7 @@ const Editor = ({ roomId, socket }) => {
   const debouncedEmit = useCallback(
     debounce((value) => {
       if (socket && socket.connected) {
-        socket.emit('code-change', { roomId, code: utf8_to_b64_safe(value) });
+        socket.emit('code-change', { roomId, code: value });
       }
     }, 300),
     [socket, roomId]
@@ -97,11 +99,15 @@ const Editor = ({ roomId, socket }) => {
 
   const handleEditorChange = (value) => {
     setCode(value);
+    setIsDefaultCode(false);
+    setIsCodeModified(true);
+    onChange(value);
     debouncedEmit(value);
   };
 
   const handleLanguageChange = (newLanguage) => {
     setLanguage(newLanguage.toString());
+    onLanguageChange(newLanguage);
     if (editorRef.current && monacoRef.current) {
       const model = editorRef.current.getModel();
       if (model) {
@@ -142,7 +148,11 @@ const Editor = ({ roomId, socket }) => {
   };
 
   const handleClearCode = () => {
-    setCode('');
+    const newCode = '';
+    setCode(newCode);
+    setIsDefaultCode(false);
+    setIsCodeModified(true);
+    onChange(newCode);
     if (hasRun) {
       setOutput('');
       if (executorRef.current) {
@@ -155,7 +165,7 @@ const Editor = ({ roomId, socket }) => {
     setHasRun(false);
     
     if (editorRef.current) {
-      editorRef.current.setValue('');
+      editorRef.current.setValue(newCode);
       editorRef.current.getModel().pushEditOperations([], [], () => null);
     }
 
@@ -217,7 +227,6 @@ const Editor = ({ roomId, socket }) => {
             <span className="ml-2">Save</span>
           </button>
         </div>
-
       </div>
       <div className="editor-wrapper">
         <MonacoEditor
