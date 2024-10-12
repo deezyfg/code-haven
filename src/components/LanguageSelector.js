@@ -16,8 +16,8 @@ const LanguageSelector = ({ value, onChange }) => {
       ...provided,
       backgroundColor: '#2d2d2d',
       borderColor: '#3e3e3e',
-      width: '180px', // Adjusted width
-      minHeight: '38px', // Ensure consistent height with other components
+      width: '180px',
+      minHeight: '38px',
     }),
     singleValue: (provided) => ({
       ...provided,
@@ -34,6 +34,10 @@ const LanguageSelector = ({ value, onChange }) => {
     menu: (provided) => ({
       ...provided,
       backgroundColor: '#2d2d2d',
+    }),
+    input: (provided) => ({
+      ...provided,
+      color: 'white',
     }),
   };
 
