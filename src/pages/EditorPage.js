@@ -9,6 +9,7 @@ import CollaborationMenu from '../components/CollaborationMenu';
 import { initSocket } from '../socket';
 import { ACTIONS } from '../actions/actions';
 import { usePostContext } from '../context/PostContext';
+import { updateFileName } from '../helpers/languageExtensions';
 import './EditorPage.css';
 import GroupChat from '../components/GroupChat';
 
@@ -23,8 +24,9 @@ const EditorPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [clients, setClients] = useState([]);
-  const [code, setCode] = useState('');
-  const [language, setLanguage] = useState('javascript');
+  const [openFiles, setOpenFiles] = useState([{ name: 'untitled.js', content: '' }]);
+  const [activeFileIndex, setActiveFileIndex] = useState(0);
+  const [language, setLanguage] = useState('63'); // Default to JavaScript
   const socketRef = useRef(null);
   const [status, setStatus] = useState(USER_STATUS.CONNECTING);
   const { setJoinedUsers } = usePostContext();
@@ -49,8 +51,17 @@ const EditorPage = () => {
 
         socketRef.current.on(ACTIONS.JOINED, handleJoined);
         socketRef.current.on(ACTIONS.DISCONNECTED, handleDisconnected);
-        socketRef.current.on(ACTIONS.CODE_CHANGE, ({ code }) => setCode(code));
-        socketRef.current.on(ACTIONS.LANGUAGE_CHANGE, ({ language }) => setLanguage(language));
+        socketRef.current.on(ACTIONS.CODE_CHANGE, ({ code }) => {
+          setOpenFiles(prevFiles => {
+            const newFiles = [...prevFiles];
+            newFiles[activeFileIndex].content = code;
+            return newFiles;
+          });
+        });
+        socketRef.current.on(ACTIONS.LANGUAGE_CHANGE, ({ language }) => {
+          setLanguage(language);
+          updateFileExtension(language);
+        });
 
         setStatus(USER_STATUS.CONNECTED);
       } catch (error) {
@@ -67,7 +78,15 @@ const EditorPage = () => {
       socketRef.current?.off(ACTIONS.CODE_CHANGE);
       socketRef.current?.off(ACTIONS.LANGUAGE_CHANGE);
     };
-  }, [roomId, username, navigate]);
+  }, [roomId, username, navigate, activeFileIndex]);
+
+  const updateFileExtension = useCallback((newLanguage) => {
+    setOpenFiles(prevFiles => {
+      const newFiles = [...prevFiles];
+      newFiles[activeFileIndex].name = updateFileName(newFiles[activeFileIndex].name, newLanguage);
+      return newFiles;
+    });
+  }, [activeFileIndex]);
 
   const handleErrors = useCallback((e) => {
     console.error('Socket error:', e);
@@ -114,14 +133,19 @@ const EditorPage = () => {
   }, [setJoinedUsers]);
 
   const handleCodeChange = useCallback((newCode) => {
-    setCode(newCode);
+    setOpenFiles(prevFiles => {
+      const newFiles = [...prevFiles];
+      newFiles[activeFileIndex].content = newCode;
+      return newFiles;
+    });
     socketRef.current?.emit(ACTIONS.CODE_CHANGE, { roomId, code: newCode });
-  }, [roomId]);
+  }, [activeFileIndex, roomId]);
 
   const handleLanguageChange = useCallback((newLanguage) => {
     setLanguage(newLanguage);
+    updateFileExtension(newLanguage);
     socketRef.current?.emit(ACTIONS.LANGUAGE_CHANGE, { roomId, language: newLanguage });
-  }, [roomId]);
+  }, [roomId, updateFileExtension]);
 
   const handleLeaveRoom = useCallback(() => {
     navigate('/');
@@ -137,8 +161,14 @@ const EditorPage = () => {
     setIsShareMenuOpen(true);
   }, []);
 
+  const handleFileUpload = useCallback((fileName, fileContent) => {
+    setOpenFiles(prevFiles => [...prevFiles, { name: fileName, content: fileContent }]);
+    setActiveFileIndex(openFiles.length);
+    toast.success(`File "${fileName}" loaded into the editor`);
+  }, [openFiles.length]);
+
   if (status === USER_STATUS.CONNECTING) {
-    return <div className="connecting" aria-live="polite">Connecting...</div>;
+    return <div className="connecting">Connecting...</div>;
   }
 
   if (status === USER_STATUS.CONNECTION_FAILED) {
@@ -157,18 +187,29 @@ const EditorPage = () => {
       />
       <div className="editorPageContent">
         <aside className="clientsList" aria-label="Connected Clients">
-        <h3>Group Chat</h3>
-        <GroupChat roomId={roomId} socket={socketRef.current} />
-        <br />
-        <h3>Connected Clients:</h3>
-        {clients.map((client) => (
+          <h3>Group Chat</h3>
+          <GroupChat roomId={roomId} socket={socketRef.current} />
+          <br />
+          <h3>Connected Clients:</h3>
+          {clients.map((client) => (
             <Client key={client.socketId} username={client.username} />
           ))}
         </aside>
         <main className="editorContainer" role="main">
+          <div className="file-tabs">
+            {openFiles.map((file, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveFileIndex(index)}
+                className={index === activeFileIndex ? 'active' : ''}
+              >
+                {file.name}
+              </button>
+            ))}
+          </div>
           <Editor 
             language={language} 
-            code={code} 
+            code={openFiles[activeFileIndex].content} 
             onChange={handleCodeChange}
             onLanguageChange={handleLanguageChange}
             roomId={roomId}
@@ -188,6 +229,7 @@ const EditorPage = () => {
           socket={socketRef.current}
           onClose={() => setIsCollaborationMenuOpen(false)}
           clients={clients}
+          onFileUpload={handleFileUpload}
         />
       )}
     </div>
