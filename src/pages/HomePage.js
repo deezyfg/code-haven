@@ -100,7 +100,7 @@ const HomePage = () => {
         </div>
       </div>
       <footer className="page-footer">
-        <p>Built with ❤️ by Peter Opoku-Mensah 🚀</p>
+        <p>Built by Peter Opoku-Mensah and Napey Frederick</p>
       </footer>
     </div>
   );
