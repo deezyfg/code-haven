@@ -100,7 +100,7 @@ const HomePage = () => {
         </div>
       </div>
       <footer className="page-footer">
-        <p>Built by Peter Opoku-Mensah and Napey Frederick</p>
+        <p>© 2024 Code Haven. All rights reserved.</p>
       </footer>
     </div>
   );
