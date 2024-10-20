@@ -142,7 +142,7 @@ To obtain your RapidAPI secret key for the Judge0 CE API, follow these steps:
 
 1. Visit the [Judge0 CE API on RapidAPI] (https://rapidapi.com/judge0-official/api/judge0-ce).
 2. Sign in to your RapidAPI account or create a new one if you don't have an existing account.
-3. On the Judge0 CE API page, review the available pricing plans and select the one that best suits your needs.
+3. Review the available pricing plans on the Judge0 CE API page and select the one that best suits your needs.
 4. Click the `"Subscribe"` button for your chosen plan.
 5. After subscribing, you will be redirected to a new page.
 6. Look for a field labeled `"X-RapidAPI-Key"` with a value next to it. This value is your RapidAPI secret key.
@@ -172,13 +172,12 @@ The application runs on:
 
 ## 🚀 Deployment
 
-This web app is deployed at:
-- **Frontend:** [Netlify](https://your-netlify-url.com)
-- **Backend:** [Heroku](https://your-heroku-url.com)
+This web app is deployed on [Vercel](https://vercel.com/) for both **frontend** and **backend**:
+- **Live Site:** Code Haven
 
 ## Demo Video
 
-[![Code Haven's Demo Video](https://img.youtube.com/vi/4yZkWM32Ubc/hqdefault.jpg)](https://www.youtube.com/watch?v=4yZkWM32Ubc)
+[![Code Haven's Demo Video](https://github.com/user-attachments/assets/1f614ca3-f7ae-43a1-9852-f267cf2cef52)
 
 ## 🤝 Contributing
 
@@ -190,6 +189,7 @@ This project is [MIT](LICENSE) licensed.
 
 ## 📧 Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_twitter) - email@example.com
+- **Name:** [Peter Opoku-Mensah](https://github.com/deezyfg/code-haven)  
+  - **Email:** [mensahpeter421@gmail.com](mailto:mensahpeter421@gmail.com)
 
-Project Link: [https://github.com/deezyfg/code-haven](https://github.com/deezyfg/code-haven)
+- **Project Link:** [Code Haven Repository](https://github.com/deezyfg/code-haven)
