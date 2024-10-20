@@ -173,11 +173,11 @@ The application runs on:
 ## 🚀 Deployment
 
 This web app is deployed on [Vercel](https://vercel.com/) for both **frontend** and **backend**:
-- **Live Site:** Code Haven
+- **Live Site:** [Code Haven](https://code-haven-wheat.vercel.app/)
 
 ## Demo Video
 
-[![Code Haven's Demo Video](https://github.com/user-attachments/assets/1f614ca3-f7ae-43a1-9852-f267cf2cef52)
+[![Code Haven Demo Video](https://i.imgur.com/BPrzBx1.png)](https://github.com/user-attachments/assets/1f614ca3-f7ae-43a1-9852-f267cf2cef52)
 
 ## 🤝 Contributing
 
