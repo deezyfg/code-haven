@@ -11,6 +11,21 @@
 - Theme customization
 - Automatic Syntax Highlighting
 
+## 🌐️ Technologies Used
+
+- Frontend (Client-Side)
+    - **HTML5:** Structures the web application's content and layout.
+    - **CSS3:** Styles the application, enhancing visual appeal and user experience.
+    - **JavaScript (ES6+):** Provides dynamic functionality and interactivity on the client-side.
+    - **React.js:** A JavaScript library for building user interfaces, enabling efficient rendering and component-based architecture.
+    - **Monaco Editor:** Integrated as the code editor component, providing features like syntax highlighting and auto-suggestions.
+
+- Backend (Server-Side)
+    - **Node.js:** A JavaScript runtime for building server-side applications and handling API requests efficiently.
+    - **Express.js:** A web application framework for Node.js, used to build the server and handle HTTP requests.
+    - **Socket.io:** A powerful JavaScript library for real-time web applications, enabling bi-directional, event-based communication between clients and servers.
+    - **Judge0 API:** Enables multi-language code execution within the app.
+
 ## 📂 File Structure
 
 ```
@@ -135,6 +150,8 @@ SERVER_PORT=5000
 ```
 
 Replace `your_rapid_api_secret_here` with your actual RapidAPI secret key after subscribing to the Judge0 API on RapidAPI.
+
+**Important:** Ensure that you create the .env file before running the development server. If there's no .env file when you enter a room, you may be disconnected shortly after.
 
 #### 🔑 API Key Setup
 
